@@ -94,18 +94,24 @@ public class Shape : MonoBehaviour {
         }
 
         bool hasIncoming = Data.IncomingId != Guid.Empty.ToString();
+        
+        Debug.Log($"hasIncoming {hasIncoming} hasOutgoing {hasOutgoing} outgoingDirection {outgoingDirection}");
 
         if (outgoingDirection) {
             if (hasOutgoing) {
                 SpawnOutgoingBranches(logic);
             } else if (hasIncoming) {
-                logic(Data.Id, Data.IncomingId);
+                logic?.Invoke(Data.Id, Data.IncomingId);
             }
         } else {
             if (hasIncoming) {
-                logic(Data.Id, Data.IncomingId);
+                logic?.Invoke(Data.Id, Data.IncomingId);
             } else {
-                SpawnOutgoingBranches(logic);
+                if (hasOutgoing) {
+                    if (id != Guid.Empty.ToString()) {
+                        logic?.Invoke(Data.Id, id);
+                    }
+                }
             }
         }
     }
@@ -116,7 +122,7 @@ public class Shape : MonoBehaviour {
                 continue;
             }
 
-            logic(Data.Id, Data.OutgoingIds[i]);
+            logic?.Invoke(Data.Id, Data.OutgoingIds[i]);
         }
     }
 
