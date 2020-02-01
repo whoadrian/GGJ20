@@ -5,6 +5,7 @@ using System.ComponentModel.Design.Serialization;
 using Sirenix.OdinInspector;
 using UnityEngine;
 using UnityEngine.UIElements;
+using whoa.UX;
 
 public enum Command {
     NONE,
@@ -23,8 +24,10 @@ public class GameSystem : MonoBehaviour {
     public GameObject BallPrefab;
     public LevelConfig LevelConfig;
     public ShapeAssets ShapeAssets;
-    
+    public InteractableGizmoConfig GizmoConfig;
+
     [Header("Level")]
+    public Camera Cam;
     public Sequence Sequence;
     public Sun Sun;
 

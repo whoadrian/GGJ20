@@ -69,7 +69,12 @@ public class Shape : MonoBehaviour {
     }
 
     public void TriggerShape(string id = null) {
+        TraverseTree(SpawnBall, id);
 
+        // TODO: Play sound
+    }
+
+    public void TraverseTree(Action<string, string> logic, string id = null) {
         bool outgoingDirection = true;
         if (!string.IsNullOrEmpty(id) && id != Guid.Empty.ToString()) {
             foreach (var outId in Data.OutgoingIds) {
@@ -92,28 +97,26 @@ public class Shape : MonoBehaviour {
 
         if (outgoingDirection) {
             if (hasOutgoing) {
-                SpawnOutgoingBalls();
+                SpawnOutgoingBranches(logic);
             } else if (hasIncoming) {
-                SpawnBall(Data.Id, Data.IncomingId);
+                logic(Data.Id, Data.IncomingId);
             }
         } else {
             if (hasIncoming) {
-                SpawnBall(Data.Id, Data.IncomingId);
+                logic(Data.Id, Data.IncomingId);
             } else {
-                SpawnOutgoingBalls();
+                SpawnOutgoingBranches(logic);
             }
         }
-
-        // TODO: Play sound
     }
-
-    private void SpawnOutgoingBalls() {
+    
+    private void SpawnOutgoingBranches(Action<string, string> logic) {
         for (int i = 0; i < (int)Data.Type; i++) {
             if (Data.OutgoingIds[i] == Guid.Empty.ToString()) {
                 continue;
             }
 
-            SpawnBall(Data.Id, Data.OutgoingIds[i]);
+            logic(Data.Id, Data.OutgoingIds[i]);
         }
     }
 

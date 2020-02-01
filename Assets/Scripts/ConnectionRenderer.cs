@@ -52,9 +52,11 @@ public class ConnectionRenderer : MonoBehaviour {
         } else {
             allShapes = GameObject.FindObjectsOfType<Shape>().ToList();
         }
-        
-        UpdateShapeConnections(allShapes);
-        UpdateSunConnections(allShapes);
+
+        if (allShapes != null) {
+            UpdateShapeConnections(allShapes);
+            UpdateSunConnections(allShapes);
+        }
     }
 
     private void UpdateSunConnections(List<Shape> allShapes) {

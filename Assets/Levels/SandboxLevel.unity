@@ -795,6 +795,8 @@ MonoBehaviour:
     - Type: 4
       Prefab: {fileID: 7236308765831662664, guid: 0b2caf1db739701408ef7480fcbed033,
         type: 3}
+  GizmoConfig: {fileID: 11400000, guid: 4c3564984f663e748a8237c735c70935, type: 2}
+  Cam: {fileID: 963194227}
   Sequence: {fileID: 1111121559}
   Sun: {fileID: 1476177250}
 --- !u!4 &1111121561
@@ -826,7 +828,7 @@ PrefabInstance:
     - target: {fileID: 2753786973292853026, guid: 21d6c7b61dfd47646a468b46ed9fb86a,
         type: 3}
       propertyPath: Data.OutgoingIds.Array.data[0]
-      value: 5f8e0fb5-0625-47d4-a644-4fef7b5a42db
+      value: e49d26c2-0a5c-4d2c-8bdd-7689bb7edb14
       objectReference: {fileID: 0}
     - target: {fileID: 2753786973292853026, guid: 21d6c7b61dfd47646a468b46ed9fb86a,
         type: 3}
