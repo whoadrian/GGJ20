@@ -29,6 +29,7 @@ public class NotePool : MonoBehaviour
             var instance = PrefabUtility.InstantiatePrefab(notePrefab) as GameObject;
             instance.gameObject.SetActive(false);
             poolsByShape[shapeType].Add(instance);
+            instance.transform.parent = transform;
         }
     }
 
@@ -42,5 +43,9 @@ public class NotePool : MonoBehaviour
         return Fetch(shape);
     }
 
-    public void Return(GameObject note) => note.SetActive(false);
+    public void Return(GameObject note)
+    {
+        note.SetActive(false);
+        note.transform.parent = transform;
+    }
 }
