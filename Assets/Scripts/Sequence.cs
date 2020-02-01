@@ -47,10 +47,10 @@ public class Sequence : MonoBehaviour {
                 newState = SequenceState.PLAYING;
                 break;
             case global::Command.PAUSE:
-                newState = SequenceState.PLAYING;
+                newState = SequenceState.PAUSED;
                 break;
             case global::Command.STOP:
-                newState = SequenceState.PLAYING;
+                newState = SequenceState.STOPPED;
                 break;
             default:
                 throw new ArgumentOutOfRangeException(nameof(c), c, null);
