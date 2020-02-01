@@ -17,7 +17,7 @@ public class Ball : MonoBehaviour {
 
     [ReadOnly, ShowInInspector]
     public BallData data;
-    
+    public bool Alive = false;
     private Coroutine routine;
     private bool paused = false;
 

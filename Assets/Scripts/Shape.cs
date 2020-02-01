@@ -49,7 +49,9 @@ public class Shape : MonoBehaviour {
 
     public static List<Shape> AllShapes;
 
-    private List<Ball> balls = new List<Ball>();
+    private static List<Ball> balls = new List<Ball>();
+
+    private AudioSource source;
 
     void Start() {
         if (AllShapes == null) {
@@ -57,6 +59,7 @@ public class Shape : MonoBehaviour {
         }
 
         AllShapes.Add(this);
+        source = GetComponent<AudioSource>();
     }
 
     private void OnDestroy() {
@@ -70,8 +73,8 @@ public class Shape : MonoBehaviour {
 
     public void TriggerShape(string id = null) {
         TraverseTree(SpawnBall, id);
-
-        // TODO: Play sound
+        source.clip = GameAudio.Instance.Config.GetSound(Data.Type);
+        source.Play();
     }
 
     public void TraverseTree(Action<string, string> logic, string id = null) {
@@ -94,24 +97,18 @@ public class Shape : MonoBehaviour {
         }
 
         bool hasIncoming = Data.IncomingId != Guid.Empty.ToString();
-        
-        Debug.Log($"hasIncoming {hasIncoming} hasOutgoing {hasOutgoing} outgoingDirection {outgoingDirection}");
 
         if (outgoingDirection) {
             if (hasOutgoing) {
                 SpawnOutgoingBranches(logic);
             } else if (hasIncoming) {
-                logic?.Invoke(Data.Id, Data.IncomingId);
+                logic(Data.Id, Data.IncomingId);
             }
         } else {
             if (hasIncoming) {
-                logic?.Invoke(Data.Id, Data.IncomingId);
+                logic(Data.Id, Data.IncomingId);
             } else {
-                if (hasOutgoing) {
-                    if (id != Guid.Empty.ToString()) {
-                        logic?.Invoke(Data.Id, id);
-                    }
-                }
+                SpawnOutgoingBranches(logic);
             }
         }
     }
@@ -122,11 +119,20 @@ public class Shape : MonoBehaviour {
                 continue;
             }
 
-            logic?.Invoke(Data.Id, Data.OutgoingIds[i]);
+            logic(Data.Id, Data.OutgoingIds[i]);
         }
     }
 
     private void SpawnBall(string shapeA, string shapeB) {
+
+        for (int i = 0; i < balls.Count; i++) {
+            var b = balls[i];
+
+            if (b.Alive && (b.data.ShapeA == shapeA || b.data.ShapeA == shapeB) && (b.data.ShapeB == shapeA || b.data.ShapeB == shapeB)) {
+                return;
+            }
+        }
+        
         var obj = Instantiate(GameSystem.Instance.BallPrefab);
         var newBall = obj.GetComponent<Ball>();
         newBall.data = new BallData(shapeA, shapeB);
