@@ -422,6 +422,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   BallSpeed: 1
+  MaxBallSpeed: 3
+  MinBallSpeed: 0.2
   BallPrefab: {fileID: 4555286677524607441, guid: 5e0d6840cc15b0f4987108dc155ff59b,
     type: 3}
   LevelConfig: {fileID: 11400000, guid: f848707aef9bcb7428dbc73837524d46, type: 2}
