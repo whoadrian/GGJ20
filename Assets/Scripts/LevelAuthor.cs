@@ -11,14 +11,21 @@ public class LevelAuthor : MonoBehaviour {
     private static GameSystem system;
     
     [Button(ButtonStyle.Box)]
-    public void CreateShape(ShapeType type) {
+    public static void CreateShape(Vector2 pos, ShapeType type = ShapeType.CIRCLE) {
         SanityCheck();
+
+        var shapeParent = GameObject.Find("SHAPES");
+        if (shapeParent == null) {
+            shapeParent = new GameObject("SHAPES");
+            shapeParent.transform.position = Vector3.zero;
+        }
 
         foreach (var p in system.ShapeAssets.Prefabs) {
             if (p.Type == type) {
-                var obj = PrefabUtility.InstantiatePrefab(p.Prefab) as GameObject;
+                var obj = PrefabUtility.InstantiatePrefab(p.Prefab, shapeParent.transform) as GameObject;
                 var shape = obj.GetComponent<Shape>();
                 shape.Data = new ShapeData(type);
+                shape.transform.position = pos;
             }
         }
         
