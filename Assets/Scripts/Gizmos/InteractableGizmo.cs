@@ -4,7 +4,6 @@ using UnityEngine;
 namespace whoa.UX {
     [RequireComponent(typeof(LineRenderer))]
     [RequireComponent(typeof(SphereCollider))]
-    [ExecuteInEditMode]
     public class InteractableGizmo : MonoBehaviour {
         private InteractableGizmoConfig config;
         private InteractableGizmoConfig Config {
@@ -85,7 +84,9 @@ namespace whoa.UX {
             }
             
             var ray = Cam.ScreenPointToRay(Input.mousePosition);
-            hovered = dragging || collider.Raycast(ray, out var hitInfo, float.MaxValue);
+
+            bool hit = Physics.Raycast(ray, out var hitInfo, float.MaxValue) && hitInfo.collider == collider;
+            hovered = dragging || hit;
 
             var dT = Time.deltaTime;
             var d = hovered ? 1f : 0f;

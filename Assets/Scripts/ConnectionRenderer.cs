@@ -94,12 +94,25 @@ public class ConnectionRenderer : MonoBehaviour {
         // Update lines, gather connections between shapes that don't exist
         foreach (var entry in sunConnections) {
             if (Shape.TryGetShape(entry.Key, out var shape)) {
-                var pos = shape.Data.Position;
 
-                for (int i = 0; i < entry.Value.positionCount; i++) {
-                    var l = (float)i / (entry.Value.positionCount - 1);
+                bool found = false;
+                for (int i = 0; i < GameSystem.Instance.Sun.Data.OutgoingIds.Length; i++) {
+                    if (GameSystem.Instance.Sun.Data.OutgoingIds[i] == shape.Data.Id) {
+                        found = true;
+                        break;
+                    }
+                }
+
+                if (!found) {
+                    sunConnectionRemoval.Add(entry.Key);
+                } else {
+                    var pos = shape.Data.Position;
+
+                    for (int i = 0; i < entry.Value.positionCount; i++) {
+                        var l = (float)i / (entry.Value.positionCount - 1);
                     
-                    entry.Value.SetPosition(i, Vector2.Lerp(Vector2.zero, pos, l));
+                        entry.Value.SetPosition(i, Vector2.Lerp(Vector2.zero, pos, l));
+                    }
                 }
             } else {
                 sunConnectionRemoval.Add(entry.Key);
@@ -148,11 +161,16 @@ public class ConnectionRenderer : MonoBehaviour {
                 var posA = shapeA.Data.Position;
                 var posB = shapeB.Data.Position;
 
-                for (int i = 0; i < entry.Value.positionCount; i++) {
-                    var l = (float)i / (entry.Value.positionCount - 1);
+                if (shapeB.Data.IncomingId != shapeA.Data.Id && shapeA.Data.IncomingId != shapeB.Data.Id) {
+                    shapeConnectionsRemoval.Add(entry.Key);
+                } else {
+                    for (int i = 0; i < entry.Value.positionCount; i++) {
+                        var l = (float)i / (entry.Value.positionCount - 1);
                     
-                    entry.Value.SetPosition(i, Vector2.Lerp(posA, posB, l));
+                        entry.Value.SetPosition(i, Vector2.Lerp(posA, posB, l));
+                    }
                 }
+                
             } else {
                 shapeConnectionsRemoval.Add(entry.Key);
             }

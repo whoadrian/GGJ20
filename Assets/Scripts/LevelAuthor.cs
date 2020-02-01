@@ -59,8 +59,10 @@ public class LevelAuthor : MonoBehaviour {
             if (shapeAConnectionIndex > -1) {
                 shapeB.Data.IncomingId = shapeA.Data.Id;
                 shapeA.Data.OutgoingIds[shapeAConnectionIndex] = shapeB.Data.Id;
+#if UNITY_EDITOR
                 EditorUtility.SetDirty(shapeB);
                 EditorUtility.SetDirty(shapeA);
+#endif
                 ValidateConnections();
             }
         }
