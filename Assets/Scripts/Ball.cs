@@ -17,7 +17,8 @@ public class Ball : MonoBehaviour {
 
     [ReadOnly, ShowInInspector]
     public BallData data;
-    
+    public bool Alive = false;
+
     private Coroutine routine;
     private bool paused = false;
 
@@ -34,6 +35,7 @@ public class Ball : MonoBehaviour {
             case global::Command.NONE:
                 break;
             case global::Command.PLAY:
+                Alive = true;
                 paused = false;
                 if (routine == null) {
                     routine = StartCoroutine(Routine());
@@ -55,6 +57,7 @@ public class Ball : MonoBehaviour {
     }
 
     public void Kill() {
+        Alive = false;
         Debug.LogWarning("KILL BALL");
         if (routine != null) {
             StopCoroutine(routine);
@@ -93,9 +96,9 @@ public class Ball : MonoBehaviour {
             yield return null;
         }
         
+        Kill();
+        
         b.TriggerShape(a.Data.Id);
         b.Command(global::Command.PLAY);
-        
-        Kill();
     }
 }

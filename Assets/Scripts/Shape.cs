@@ -49,7 +49,7 @@ public class Shape : MonoBehaviour {
 
     public static List<Shape> AllShapes;
 
-    private List<Ball> balls = new List<Ball>();
+    private static List<Ball> balls = new List<Ball>();
 
     void Start() {
         if (AllShapes == null) {
@@ -127,6 +127,15 @@ public class Shape : MonoBehaviour {
     }
 
     private void SpawnBall(string shapeA, string shapeB) {
+
+        for (int i = 0; i < balls.Count; i++) {
+            var b = balls[i];
+
+            if (b.Alive && (b.data.ShapeA == shapeA || b.data.ShapeA == shapeB) && (b.data.ShapeB == shapeA || b.data.ShapeB == shapeB)) {
+                return;
+            }
+        }
+        
         var obj = Instantiate(GameSystem.Instance.BallPrefab);
         var newBall = obj.GetComponent<Ball>();
         newBall.data = new BallData(shapeA, shapeB);
