@@ -114,10 +114,14 @@ public class LevelAuthor : MonoBehaviour {
     [BoxGroup("Validation")]
     [Button(ButtonStyle.Box)]
     public static void ValidateConnections() {
-        Debug.Log("Validating Connections...");
-        
         SanityCheck();
         var allShapes = GameObject.FindObjectsOfType<Shape>();
+
+        if (system == null || system.Sun == null) {
+            return;
+        }
+        
+        Debug.Log("Validating Connections...");
         
         // Check for duplicates in sun's connections
         for (int i = 0; i < system.Sun.Data.OutgoingIds.Length - 1; i++) {
@@ -230,7 +234,7 @@ public class LevelAuthor : MonoBehaviour {
 
     private static void SanityCheck() {
         if (system == null) {
-            system = GameObject.FindObjectOfType<GameSystem>();
+            system = GameSystem.Instance != null ? GameSystem.Instance : FindObjectOfType<GameSystem>();
         }
     }
 
