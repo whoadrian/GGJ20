@@ -25,13 +25,4 @@ public class SequenceVisualizer : MonoBehaviour
             center + Vector2.right * halfOfWidth,
             percentage);
     }
-
-    private void OnDrawGizmos()
-    {
-        Gizmos.DrawSphere(sequenceVisualizationPanelContent.anchoredPosition, .2f);
-        Gizmos.color = Color.yellow;
-        Gizmos.DrawSphere(sequenceVisualizationPanelContent.anchoredPosition +
-                          sequenceVisualizationPanelContent.sizeDelta, .3f);
-        
-    }
 }
