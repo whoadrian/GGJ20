@@ -9,10 +9,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 0}
+  m_Script: {fileID: 11500000, guid: 2417e37d0ddf5ee4ea9b99bba5bdfedd, type: 3}
   m_Name: AudioConfig
-  m_EditorClassIdentifier: Assembly-CSharp::AudioConfig
-  CircleSound: {fileID: 8300000, guid: 1b5484d21dfb26940ba0f1555364f6ca, type: 3}
-  TriangleSound: {fileID: 8300000, guid: 8926d3f8a942d3a4b978ab4aaab5f4e1, type: 3}
+  m_EditorClassIdentifier: 
+  CircleSound: {fileID: 8300000, guid: 8926d3f8a942d3a4b978ab4aaab5f4e1, type: 3}
+  TriangleSound: {fileID: 8300000, guid: 1b5484d21dfb26940ba0f1555364f6ca, type: 3}
   SquareSound: {fileID: 8300000, guid: 05a01419827d36e4e8e1cba3310d2231, type: 3}
   ConnectionSound: {fileID: 8300000, guid: ec7a58b1d1693a74e91215efd036d5b9, type: 3}
