@@ -6,6 +6,10 @@ using UnityEngine;
 [Serializable]
 public struct SunData {
     public string[] OutgoingIds;
+
+    public SunData(string[] outgoingIds) {
+        this.OutgoingIds = outgoingIds;
+    }
 }
 
 public class Sun : MonoBehaviour {

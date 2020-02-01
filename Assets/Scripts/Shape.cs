@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Runtime.CompilerServices;
 using Sirenix.OdinInspector;
 using UnityEngine;
 
@@ -66,19 +67,60 @@ public class Shape : MonoBehaviour {
         Data.Position = transform.position;
     }
 
-    public void TriggerShape() {
+    public void TriggerShape(string id = null) {
+
+        bool outgoingDirection = true;
+        if (!string.IsNullOrEmpty(id) && id != Guid.Empty.ToString()) {
+            foreach (var outId in Data.OutgoingIds) {
+                if (outId == id) {
+                    outgoingDirection = false;
+                    break;
+                }
+            }
+        }
+
+        bool hasOutgoing = false;
+        foreach (var o in Data.OutgoingIds) {
+            if (o != Guid.Empty.ToString()) {
+                hasOutgoing = true;
+                break;
+            }
+        }
+
+        bool hasIncoming = Data.IncomingId != Guid.Empty.ToString();
+
+        if (outgoingDirection) {
+            if (hasOutgoing) {
+                SpawnOutgoingBalls();
+            } else if (hasIncoming) {
+                SpawnBall(Data.Id, Data.IncomingId);
+            }
+        } else {
+            if (hasIncoming) {
+                SpawnBall(Data.Id, Data.IncomingId);
+            } else {
+                SpawnOutgoingBalls();
+            }
+        }
+
+        // TODO: Play sound
+    }
+
+    private void SpawnOutgoingBalls() {
         for (int i = 0; i < (int)Data.Type; i++) {
             if (Data.OutgoingIds[i] == Guid.Empty.ToString()) {
                 continue;
             }
-            
-            var obj = Instantiate(GameSystem.Instance.BallPrefab);
-            var newBall = obj.GetComponent<Ball>();
-            newBall.data = new BallData(Data.Id, Data.OutgoingIds[i]);
-            balls.Add(newBall);
-        }
 
-        // TODO: Play sound
+            SpawnBall(Data.Id, Data.OutgoingIds[i]);
+        }
+    }
+
+    private void SpawnBall(string shapeA, string shapeB) {
+        var obj = Instantiate(GameSystem.Instance.BallPrefab);
+        var newBall = obj.GetComponent<Ball>();
+        newBall.data = new BallData(shapeA, shapeB);
+        balls.Add(newBall);
     }
 
     public void Command(Command c) {
@@ -95,7 +137,8 @@ public class Shape : MonoBehaviour {
                 throw new ArgumentOutOfRangeException(nameof(c), c, null);
         }
 
-        foreach (var b in balls) {
+        for (int i = balls.Count - 1; i >= 0; i--) {
+            var b = balls[i];
             if (b != null) {
                 b.Command(c);
             } else {

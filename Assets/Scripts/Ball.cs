@@ -80,7 +80,7 @@ public class Ball : MonoBehaviour {
         }
 
         var startPos = a.Data.Position;
-        var endPos = a.Data.Position;
+        var endPos = b.Data.Position;
 
         Position = startPos;
         var d = (endPos - startPos).magnitude;
@@ -95,6 +95,9 @@ public class Ball : MonoBehaviour {
             }
             yield return null;
         }
+        
+        b.TriggerShape(a.Data.Id);
+        b.Command(global::Command.PLAY);
         
         Kill();
     }

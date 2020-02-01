@@ -55,6 +55,8 @@ public class LevelAuthor : MonoBehaviour {
         if (shapeAConnectionIndex > -1) {
             shapeB.Data.IncomingId = shapeA.Data.Id;
             shapeA.Data.OutgoingIds[shapeAConnectionIndex] = shapeB.Data.Id;
+            EditorUtility.SetDirty(shapeB);
+            EditorUtility.SetDirty(shapeA);
         }
     }
 
@@ -103,7 +105,9 @@ public class LevelAuthor : MonoBehaviour {
         }
 
         newList[index] = shape.Data.Id;
-        system.Sun.Data.OutgoingIds = newList;
+        system.Sun.Data = new SunData(newList);
+        
+        EditorUtility.SetDirty(system.Sun);
     }
 
     private void SanityCheck() {
