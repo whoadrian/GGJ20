@@ -18,6 +18,8 @@ public class ConnectionManager : MonoBehaviour {
     private Shape shapeB;
 
     private State state;
+    
+    public Action OnConnectionCreated;
 
     public void Update() {
         // Stop editing while playing
@@ -61,7 +63,8 @@ public class ConnectionManager : MonoBehaviour {
                             GameSystem.Instance.Sun.Data.AddOutgoingId(shapeA.Data.Id);
 #if UNITY_EDITOR
                             EditorUtility.SetDirty(shapeA);
-#endif
+#endif            
+                            OnConnectionCreated?.Invoke();
                             LevelAuthor.ValidateConnections();
                             break;
                         }
@@ -108,6 +111,7 @@ public class ConnectionManager : MonoBehaviour {
                                 EditorUtility.SetDirty(shapeB);
                                 EditorUtility.SetDirty(shapeA);
 #endif
+                                OnConnectionCreated?.Invoke();
                                 LevelAuthor.ValidateConnections();
                             }
                         }

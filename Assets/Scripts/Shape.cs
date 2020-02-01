@@ -40,12 +40,15 @@ public class Shape : MonoBehaviour {
 
     private List<Ball> balls = new List<Ball>();
 
+    private AudioSource source;
+
     void Start() {
         if (AllShapes == null) {
             AllShapes = new List<Shape>();
         }
 
         AllShapes.Add(this);
+        source = GetComponent<AudioSource>();
     }
 
     private void OnDestroy() {
@@ -59,8 +62,8 @@ public class Shape : MonoBehaviour {
 
     public void TriggerShape(string id = null) {
         TraverseTree(SpawnBall, id);
-
-        // TODO: Play sound
+        source.clip = GameAudio.Instance.Config.GetSound(Data.Type);
+        source.Play();
     }
 
     public void TraverseTree(Action<string, string> logic, string id = null) {
@@ -83,8 +86,6 @@ public class Shape : MonoBehaviour {
         }
 
         bool hasIncoming = Data.IncomingId != Guid.Empty.ToString();
-        
-        Debug.Log($"hasIncoming {hasIncoming} hasOutgoing {hasOutgoing} outgoingDirection {outgoingDirection}");
 
         if (outgoingDirection) {
             if (hasOutgoing) {
@@ -97,9 +98,7 @@ public class Shape : MonoBehaviour {
                 logic?.Invoke(Data.Id, Data.IncomingId);
             } else {
                 if (hasOutgoing) {
-                    Debug.Log("HERE " + id);
                     if (id != Guid.Empty.ToString()) {
-                        Debug.Log("SPAWN " + Data.Id + " TO " + id);
                         logic?.Invoke(Data.Id, id);
                     }
                 }
@@ -131,7 +130,6 @@ public class Shape : MonoBehaviour {
             var b = balls[i];
 
             if (b.Alive && (b.data.ShapeA == shapeA || b.data.ShapeA == shapeB) && (b.data.ShapeB == shapeA || b.data.ShapeB == shapeB)) {
-                Debug.Log("ALREADY THERE");
                 return;
             }
         }
