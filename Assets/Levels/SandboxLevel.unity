@@ -828,7 +828,7 @@ PrefabInstance:
     - target: {fileID: 2753786973292853026, guid: 21d6c7b61dfd47646a468b46ed9fb86a,
         type: 3}
       propertyPath: Data.OutgoingIds.Array.data[0]
-      value: e49d26c2-0a5c-4d2c-8bdd-7689bb7edb14
+      value: 7312feb2-6c6e-4fac-9355-f3457d053956
       objectReference: {fileID: 0}
     - target: {fileID: 2753786973292853026, guid: 21d6c7b61dfd47646a468b46ed9fb86a,
         type: 3}
