@@ -238,16 +238,16 @@ PrefabInstance:
       propertyPath: m_Name
       value: UI
       objectReference: {fileID: 0}
-    - target: {fileID: 1948781264627627540, guid: ddd18697b9fb3b1408001f8467f452fd,
+    - target: {fileID: 1424804800512721739, guid: ddd18697b9fb3b1408001f8467f452fd,
         type: 3}
-      propertyPath: system
-      value: 
-      objectReference: {fileID: 1111121560}
-    - target: {fileID: 1948781264627627540, guid: ddd18697b9fb3b1408001f8467f452fd,
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9171744872015889047, guid: ddd18697b9fb3b1408001f8467f452fd,
         type: 3}
-      propertyPath: sequence
-      value: 
-      objectReference: {fileID: 1111121559}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ddd18697b9fb3b1408001f8467f452fd, type: 3}
 --- !u!1 &763822488

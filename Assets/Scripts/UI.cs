@@ -1,7 +1,13 @@
-﻿using UnityEngine;
+using UnityEngine;
+using UnityEngine.UI;
 
 public class UI : MonoBehaviour {
     private GameSystem system;
+    public Slider tempoSlider;
+
+    public void Start() {
+        tempoSlider?.SetValueWithoutNotify(Mathf.InverseLerp(GameSystem.Instance.MinBallSpeed, GameSystem.Instance.MaxBallSpeed, GameSystem.Instance.BallSpeed));
+    }
 
     public void Play() {
         if (!CheckSanity()) {
@@ -42,5 +48,9 @@ public class UI : MonoBehaviour {
 
     public void SpawnSquare() {
         LevelAuthor.CreateShape(UnityEngine.Random.onUnitSphere * 4, ShapeType.SQUARE);
+    }
+
+    public void OnTempoChange(float value) {
+        GameSystem.Instance.BallSpeed = Mathf.Lerp(GameSystem.Instance.MinBallSpeed, GameSystem.Instance.MaxBallSpeed, value);
     }
 }
