@@ -16,7 +16,7 @@ public class Sun : MonoBehaviour {
     [ReadOnly, SerializeField, ShowInInspector]
     public SunData Data;
 
-    public void Command(Command c, SequenceState s) {
+    public void Command(Command c, bool triggerFirstConnections) {
         // collect shapes
         var shapes = new List<Shape>();
         foreach (var shapeId in Data.OutgoingIds) {
@@ -27,32 +27,11 @@ public class Sun : MonoBehaviour {
             
             shapes.Add(shape);
         }
-        
-        switch (c) {
-            case global::Command.NONE:
-                break;
-            case global::Command.PLAY:
-                switch (s) {
-                    // if sequence previously stopped, trigger the song
-                    case SequenceState.STOPPED:
-                        foreach (var shape in shapes) {
-                            shape.TriggerShape();
-                        }
-                        break;
-                    case SequenceState.PLAYING:
-                        break;
-                    case SequenceState.PAUSED:
-                        break;
-                    default:
-                        throw new ArgumentOutOfRangeException(nameof(s), s, null);
-                }
-                break;
-            case global::Command.PAUSE:
-                break;
-            case global::Command.STOP:
-                break;
-            default:
-                throw new ArgumentOutOfRangeException(nameof(c), c, null);
+
+        if (triggerFirstConnections) {
+            foreach (var shape in shapes) {
+                shape.TriggerShape();
+            }
         }
 
         foreach (var shape in shapes) {

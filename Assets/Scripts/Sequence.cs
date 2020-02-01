@@ -23,6 +23,8 @@ public class Sequence : MonoBehaviour {
         get { return state; }
     }
 
+    public Action OnSequenceRestart;
+
     private float startTime = 0;
     private float time = 0;
     private Coroutine loop;
@@ -86,6 +88,8 @@ public class Sequence : MonoBehaviour {
         while (time - startTime <= Data.duration) {
             yield return null;
         }
+        
+        OnSequenceRestart?.Invoke();
 
         loop = StartCoroutine(Loop());
     }

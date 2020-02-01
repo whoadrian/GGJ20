@@ -37,7 +37,13 @@ public class GameSystem : MonoBehaviour {
     }
 
     void Start() {
-        
+        Sequence.OnSequenceRestart += OnSequenceRestart;
+    }
+
+    private void OnSequenceRestart() {
+        Debug.Log("Sequence restart");
+        Sun.Command(global::Command.STOP, false);
+        Sun.Command(global::Command.PLAY, true);
     }
 
     void Update() {
@@ -46,7 +52,7 @@ public class GameSystem : MonoBehaviour {
     public void Command(Command c) {
         var sequenceState = Sequence.State;
         if (Sequence.Command(c)) {
-            Sun.Command(c, sequenceState);
+            Sun.Command(c, sequenceState == SequenceState.STOPPED);
         }
     }
 }

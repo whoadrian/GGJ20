@@ -41,6 +41,7 @@ public class Ball : MonoBehaviour {
     }
 
     public void Command(Command c) {
+        Debug.Log("Ball received command " + c);
         switch (c) {
             case global::Command.NONE:
                 break;

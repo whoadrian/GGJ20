@@ -124,6 +124,7 @@ public class Shape : MonoBehaviour {
     }
 
     public void Command(Command c) {
+        Debug.Log("Shape received command " + c);
         switch (c) {
             case global::Command.NONE:
                 break;
@@ -144,6 +145,18 @@ public class Shape : MonoBehaviour {
             } else {
                 balls.Remove(b);
             }
+        }
+
+        foreach (var outId in Data.OutgoingIds) {
+            if (outId == Guid.Empty.ToString()) {
+                continue;
+            }
+            
+            if (!TryGetShape(outId, out var outShape)) {
+                Debug.LogError("Shape couldn't find outgoing connection ID " + outId);
+            }
+            
+            outShape.Command(c);
         }
     }
 
