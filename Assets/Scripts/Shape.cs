@@ -61,6 +61,7 @@ public class Shape : MonoBehaviour {
 
     private void OnDestroy() {
         AllShapes?.Remove(this);
+        LevelAuthor.ValidateConnections();
     }
 
     void Update() {

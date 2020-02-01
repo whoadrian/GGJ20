@@ -10,6 +10,50 @@ public struct SunData {
     public SunData(string[] outgoingIds) {
         this.OutgoingIds = outgoingIds;
     }
+
+    public void AddOutgoingId(string id) {
+        string[] newList = new string[OutgoingIds.Length + 1];
+        for (int i = 0; i < OutgoingIds.Length; i++) {
+            newList[i] = OutgoingIds[i];
+        }
+
+        newList[newList.Length - 1] = id;
+        OutgoingIds = newList;
+    }
+
+    public void RemoveOutgoingId(string id) {
+        for (int i = 0; i < OutgoingIds.Length; i++) {
+            if (OutgoingIds[i] == id) {
+                OutgoingIds[i] = Guid.Empty.ToString();
+            }
+        }
+        
+        RemoveEmptyIds();
+    }
+
+    public void RemoveEmptyIds() {
+        var validCount = 0;
+        for (int i = 0; i < OutgoingIds.Length; i++) {
+            if (OutgoingIds[i] != Guid.Empty.ToString()) {
+                validCount++;
+            }
+        }
+
+        if (validCount == OutgoingIds.Length) {
+            return;
+        }
+
+        string[] newList = new string[validCount];
+        var index = 0;
+        for (int i = 0; i < OutgoingIds.Length; i++) {
+            if (OutgoingIds[i] != Guid.Empty.ToString()) {
+                newList[index] = OutgoingIds[i];
+                index++;
+            }
+        }
+
+        OutgoingIds = newList;
+    }
 }
 
 public class Sun : MonoBehaviour {
