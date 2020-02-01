@@ -79,6 +79,11 @@ namespace whoa.UX {
         }
 
         private void LateUpdate() {
+            // Stop editing while playing
+            if (GameSystem.Instance && GameSystem.Instance.Sequence.State != SequenceState.STOPPED) {
+                return;
+            }
+            
             var ray = Cam.ScreenPointToRay(Input.mousePosition);
             hovered = dragging || collider.Raycast(ray, out var hitInfo, float.MaxValue);
 
