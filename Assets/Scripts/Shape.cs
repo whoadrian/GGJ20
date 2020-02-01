@@ -124,7 +124,6 @@ public class Shape : MonoBehaviour {
     }
 
     public void Command(Command c) {
-        Debug.Log("Shape received command " + c);
         switch (c) {
             case global::Command.NONE:
                 break;
