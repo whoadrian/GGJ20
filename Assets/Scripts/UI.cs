@@ -8,8 +8,8 @@ public class UI : MonoBehaviour {
     private GameSystem system;
     public SequenceVisualizer Visualizer;
 
-    private void Start()
-    {
+    private void Start() {
+        CheckSanity();
         Visualizer.system = system;
         Visualizer.sequence = system.Sequence;
     }

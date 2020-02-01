@@ -21,14 +21,17 @@ public struct SunData {
         OutgoingIds = newList;
     }
 
-    public void RemoveOutgoingId(string id) {
+    public bool RemoveOutgoingId(string id) {
+        bool removed = false;
         for (int i = 0; i < OutgoingIds.Length; i++) {
             if (OutgoingIds[i] == id) {
                 OutgoingIds[i] = Guid.Empty.ToString();
+                removed = true;
             }
         }
         
         RemoveEmptyIds();
+        return removed;
     }
 
     public void RemoveEmptyIds() {

@@ -48,31 +48,43 @@ public class ConnectionManager : MonoBehaviour {
 
                     if (Physics.Raycast(ray, out var hitInfo, float.MaxValue)) {
                         shapeB = hitInfo.transform.GetComponent<Shape>();
+                        var sun = hitInfo.transform.GetComponent<Sun>();
                         if (shapeB == null) {
+                            if (sun == null) {
+                                break;
+                            }
+
+                            if (GameSystem.Instance.Sun.Data.RemoveOutgoingId(shapeA.Data.Id)) {
+                                break;
+                            }
+
+                            GameSystem.Instance.Sun.Data.AddOutgoingId(shapeA.Data.Id);
+#if UNITY_EDITOR
+                            EditorUtility.SetDirty(shapeA);
+#endif
+                            LevelAuthor.ValidateConnections();
                             break;
                         }
 
                         if (shapeA.Data.IncomingId == shapeB.Data.Id) {
                             break;
                         }
-                        
-                        if (shapeB.Data.IncomingId != Guid.Empty.ToString()) {
 
+                        if (shapeB.Data.IncomingId != Guid.Empty.ToString()) {
                             if (shapeB.Data.IncomingId == shapeA.Data.Id) {
                                 shapeB.Data.IncomingId = Guid.Empty.ToString();
-                                
+
                                 for (int i = 0; i < (int)shapeA.Data.Type; i++) {
                                     if (shapeA.Data.OutgoingIds[i] == shapeB.Data.Id) {
                                         shapeA.Data.OutgoingIds[i] = Guid.Empty.ToString();
                                     }
                                 }
                             }
-                            
+
 #if UNITY_EDITOR
                             EditorUtility.SetDirty(shapeB);
                             EditorUtility.SetDirty(shapeA);
 #endif
-                            
                         } else {
                             int shapeAConnectionIndex = -1;
                             for (int i = 0; i < (int)shapeA.Data.Type; i++) {
@@ -93,6 +105,7 @@ public class ConnectionManager : MonoBehaviour {
                         }
                     }
                 }
+
                 break;
         }
     }

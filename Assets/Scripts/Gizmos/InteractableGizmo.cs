@@ -49,7 +49,7 @@ namespace whoa.UX {
             tr = transform;
             
             collider = GetComponent<SphereCollider>();
-            collider.radius = GameSystem.Instance.ConnectionDistance;
+            collider.radius = Config.maxRadius;
             
             line = GetComponent<LineRenderer>();
             line.loop = true;
@@ -102,7 +102,7 @@ namespace whoa.UX {
                 line.startColor = line.endColor = g;
                 
                 for (int i = 0; i < line.positionCount; i++) {
-                    line.SetPosition(i, directions[i] * math.lerp(Config.minRadius, GameSystem.Instance.ConnectionDistance, c));
+                    line.SetPosition(i, directions[i] * math.lerp(Config.minRadius, Config.maxRadius, c));
                 }
             }
 

@@ -8,7 +8,7 @@ namespace whoa.UX {
         [Space]
         public int resolution;
         public float minRadius;
-        //public float maxRadius;
+        public float maxRadius;
         public float minWidth;
         public float maxWidth;
         [Space]
