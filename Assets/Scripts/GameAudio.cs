@@ -18,6 +18,7 @@ public class AudioConfig : ScriptableObject {
     public AudioClip CircleSound;
     public AudioClip TriangleSound;
     public AudioClip SquareSound;
+    public AudioClip ConnectionSound;
 
     public AudioClip GetSound(ShapeType shapeType)
     {
