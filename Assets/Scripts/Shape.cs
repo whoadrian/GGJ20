@@ -161,10 +161,20 @@ public class Shape : MonoBehaviour {
     }
 
     public static bool TryGetShape(string id, out Shape shape) {
-        foreach (var s in AllShapes) {
-            if (s.Data.Id == id) {
-                shape = s;
-                return true;
+        if (!Application.isPlaying) {
+            var shapes = FindObjectsOfType<Shape>();
+            foreach (var s in shapes) {
+                if (s.Data.Id == id) {
+                    shape = s;
+                    return true;
+                }
+            }
+        } else {
+            foreach (var s in AllShapes) {
+                if (s.Data.Id == id) {
+                    shape = s;
+                    return true;
+                }
             }
         }
 

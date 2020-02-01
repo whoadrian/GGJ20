@@ -7,9 +7,8 @@ using UnityEditor;
 using UnityEngine;
 
 public class LevelAuthor : MonoBehaviour {
-
     private static GameSystem system;
-    
+
     [Button(ButtonStyle.Box)]
     public static void CreateShape(Vector2 pos, ShapeType type = ShapeType.CIRCLE) {
         SanityCheck();
@@ -22,13 +21,18 @@ public class LevelAuthor : MonoBehaviour {
 
         foreach (var p in system.ShapeAssets.Prefabs) {
             if (p.Type == type) {
+#if UNITY_EDITOR
                 var obj = PrefabUtility.InstantiatePrefab(p.Prefab, shapeParent.transform) as GameObject;
+#else
+                var obj = GameObject.Instantiate(p.Prefab, shapeParent.transform);
+#endif
+
                 var shape = obj.GetComponent<Shape>();
                 shape.Data = new ShapeData(type);
                 shape.transform.position = pos;
             }
         }
-        
+
         ValidateConnections();
     }
 
@@ -85,7 +89,7 @@ public class LevelAuthor : MonoBehaviour {
             }
         }
     }
-    
+
     [BoxGroup("Sun Connections")]
     [Button(ButtonStyle.Box)]
     public void ConnectShapeToSun() {
@@ -127,16 +131,16 @@ public class LevelAuthor : MonoBehaviour {
         if (system == null || system.Sun == null) {
             return;
         }
-        
+
         Debug.Log("Validating Connections...");
-        
+
         // Check for duplicates in sun's connections
         for (int i = 0; i < system.Sun.Data.OutgoingIds.Length - 1; i++) {
             var idA = system.Sun.Data.OutgoingIds[i];
             if (idA == Guid.Empty.ToString()) {
                 continue;
             }
-            
+
             for (int j = i + 1; j < system.Sun.Data.OutgoingIds.Length; j++) {
                 var idB = system.Sun.Data.OutgoingIds[j];
                 if (idB == Guid.Empty.ToString()) {
@@ -149,7 +153,7 @@ public class LevelAuthor : MonoBehaviour {
                 }
             }
         }
-        
+
         // Remove sun's empty connections
         system.Sun.Data.RemoveEmptyIds();
         EditorUtility.SetDirty(system.Sun);
@@ -160,7 +164,7 @@ public class LevelAuthor : MonoBehaviour {
             if (id == Guid.Empty.ToString()) {
                 continue;
             }
-            
+
             bool valid = false;
             foreach (var shape in allShapes) {
                 if (shape.Data.Id == id) {
@@ -174,7 +178,7 @@ public class LevelAuthor : MonoBehaviour {
                 EditorUtility.SetDirty(system.Sun);
             }
         }
-        
+
         // Go through all shapes and remove outgoing id duplicates
         foreach (var shape in allShapes) {
             for (int i = 0; i < shape.Data.OutgoingIds.Length - 1; i++) {
@@ -182,7 +186,7 @@ public class LevelAuthor : MonoBehaviour {
                 if (idA == Guid.Empty.ToString()) {
                     continue;
                 }
-            
+
                 for (int j = i + 1; j < shape.Data.OutgoingIds.Length; j++) {
                     var idB = shape.Data.OutgoingIds[j];
                     if (idB == Guid.Empty.ToString()) {
@@ -196,7 +200,7 @@ public class LevelAuthor : MonoBehaviour {
                 }
             }
         }
-        
+
         // Go through all shapes' connections and check if any shapes are missing. Remove ids if so
         foreach (var shape in allShapes) {
             var inId = shape.Data.IncomingId;
@@ -236,7 +240,7 @@ public class LevelAuthor : MonoBehaviour {
             }
         }
     }
-    
+
     // ----------------------------------------------------------------
 
     private static void SanityCheck() {
@@ -247,7 +251,7 @@ public class LevelAuthor : MonoBehaviour {
 
     private static bool GetSingleShape(out Shape shape) {
         shape = null;
-        
+
         if (UnityEditor.Selection.transforms.Length != 1) {
             Debug.LogError("Please select 1 shape");
             return false;
@@ -265,7 +269,7 @@ public class LevelAuthor : MonoBehaviour {
     private static bool GetPairShape(out Shape shapeA, out Shape shapeB) {
         shapeA = null;
         shapeB = null;
-        
+
         if (Selection.transforms.Length != 2) {
             Debug.LogError("Please select 2 shapes");
             return false;
@@ -278,5 +282,13 @@ public class LevelAuthor : MonoBehaviour {
         shapeB = second.GetComponent<Shape>();
 
         return shapeA != null && shapeB != null;
+    }
+
+    public static void SafeDestroy(GameObject obj) {
+        if (Application.isPlaying) {
+            GameObject.Destroy(obj);
+        } else {
+            GameObject.DestroyImmediate(obj);
+        }
     }
 }
