@@ -18,10 +18,10 @@ public class ShapeToTrack {
 
 public class SequenceVisualizer : MonoBehaviour
 {
-    public Sequence sequence;
-    public GameSystem system;
+    [HideInInspector] public GameSystem system;
+    [HideInInspector] public Sequence sequence;
 
-    [Header("Config")] 
+    [Header("Global Configuration")] 
     public List<ShapeToSprite> shapesToSprites;
     private Dictionary<ShapeType, Sprite> shapesToSpritesDict;
     public List<ShapeToTrack> shapesToTracks;
