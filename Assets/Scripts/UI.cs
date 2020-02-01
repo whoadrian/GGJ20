@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-using Random = System.Random;
+﻿using UnityEngine;
 
 public class UI : MonoBehaviour {
     private GameSystem system;
@@ -35,7 +31,7 @@ public class UI : MonoBehaviour {
         system = GameSystem.Instance;
         return system != null;
     }
-
+    
     public void SpawnCircle() {
         LevelAuthor.CreateShape(UnityEngine.Random.onUnitSphere * 4, ShapeType.CIRCLE);
     }

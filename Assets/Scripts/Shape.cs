@@ -51,12 +51,15 @@ public class Shape : MonoBehaviour {
 
     private List<Ball> balls = new List<Ball>();
 
+    private AudioSource source;
+
     void Start() {
         if (AllShapes == null) {
             AllShapes = new List<Shape>();
         }
 
         AllShapes.Add(this);
+        source = GetComponent<AudioSource>();
     }
 
     private void OnDestroy() {
@@ -70,8 +73,8 @@ public class Shape : MonoBehaviour {
 
     public void TriggerShape(string id = null) {
         TraverseTree(SpawnBall, id);
-
-        // TODO: Play sound
+        source.clip = GameAudio.Instance.Config.GetSound(Data.Type);
+        source.Play();
     }
 
     public void TraverseTree(Action<string, string> logic, string id = null) {
@@ -94,24 +97,18 @@ public class Shape : MonoBehaviour {
         }
 
         bool hasIncoming = Data.IncomingId != Guid.Empty.ToString();
-        
-        Debug.Log($"hasIncoming {hasIncoming} hasOutgoing {hasOutgoing} outgoingDirection {outgoingDirection}");
 
         if (outgoingDirection) {
             if (hasOutgoing) {
                 SpawnOutgoingBranches(logic);
             } else if (hasIncoming) {
-                logic?.Invoke(Data.Id, Data.IncomingId);
+                logic(Data.Id, Data.IncomingId);
             }
         } else {
             if (hasIncoming) {
-                logic?.Invoke(Data.Id, Data.IncomingId);
+                logic(Data.Id, Data.IncomingId);
             } else {
-                if (hasOutgoing) {
-                    if (id != Guid.Empty.ToString()) {
-                        logic?.Invoke(Data.Id, id);
-                    }
-                }
+                SpawnOutgoingBranches(logic);
             }
         }
     }
@@ -122,7 +119,7 @@ public class Shape : MonoBehaviour {
                 continue;
             }
 
-            logic?.Invoke(Data.Id, Data.OutgoingIds[i]);
+            logic(Data.Id, Data.OutgoingIds[i]);
         }
     }
 
