@@ -19,6 +19,7 @@ public class GameSystem : MonoBehaviour {
 
     [Header("General Settings")]
     public float BallSpeed = 0.5f;
+    public float ConnectionDistance = 5;
     
     [Header("Assets")]
     public GameObject BallPrefab;

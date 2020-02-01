@@ -4,7 +4,6 @@ using UnityEngine;
 namespace whoa.UX {
     [RequireComponent(typeof(LineRenderer))]
     [RequireComponent(typeof(SphereCollider))]
-    [ExecuteInEditMode]
     public class InteractableGizmo : MonoBehaviour {
         private InteractableGizmoConfig config;
         private InteractableGizmoConfig Config {
@@ -50,7 +49,7 @@ namespace whoa.UX {
             tr = transform;
             
             collider = GetComponent<SphereCollider>();
-            collider.radius = Config.maxRadius;
+            collider.radius = GameSystem.Instance.ConnectionDistance;
             
             line = GetComponent<LineRenderer>();
             line.loop = true;
@@ -85,7 +84,9 @@ namespace whoa.UX {
             }
             
             var ray = Cam.ScreenPointToRay(Input.mousePosition);
-            hovered = dragging || collider.Raycast(ray, out var hitInfo, float.MaxValue);
+
+            bool hit = Physics.Raycast(ray, out var hitInfo, float.MaxValue) && hitInfo.collider == collider;
+            hovered = dragging || hit;
 
             var dT = Time.deltaTime;
             var d = hovered ? 1f : 0f;
@@ -101,7 +102,7 @@ namespace whoa.UX {
                 line.startColor = line.endColor = g;
                 
                 for (int i = 0; i < line.positionCount; i++) {
-                    line.SetPosition(i, directions[i] * math.lerp(Config.minRadius, Config.maxRadius, c));
+                    line.SetPosition(i, directions[i] * math.lerp(Config.minRadius, GameSystem.Instance.ConnectionDistance, c));
                 }
             }
 

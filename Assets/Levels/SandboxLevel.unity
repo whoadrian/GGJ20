@@ -781,6 +781,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   BallSpeed: 1
+  ConnectionDistance: 5
   BallPrefab: {fileID: 4555286677524607441, guid: 5e0d6840cc15b0f4987108dc155ff59b,
     type: 3}
   LevelConfig: {fileID: 11400000, guid: f848707aef9bcb7428dbc73837524d46, type: 2}
@@ -905,7 +906,8 @@ PrefabInstance:
       propertyPath: m_Name
       value: SUN
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 2753786973292853025, guid: 21d6c7b61dfd47646a468b46ed9fb86a, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 21d6c7b61dfd47646a468b46ed9fb86a, type: 3}
 --- !u!1 &1186685862
 GameObject:
@@ -1076,6 +1078,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1459796591}
   - component: {fileID: 1459796590}
+  - component: {fileID: 1459796592}
   m_Layer: 0
   m_Name: CONNECTIONS
   m_TagString: Untagged
@@ -1114,6 +1117,18 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1459796592
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1459796589}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 175e433a0d1293748b0998631ed93b1f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &1476177250 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 2753786973292853026, guid: 21d6c7b61dfd47646a468b46ed9fb86a,
