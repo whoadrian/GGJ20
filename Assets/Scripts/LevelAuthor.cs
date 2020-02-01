@@ -18,20 +18,16 @@ public class LevelAuthor : MonoBehaviour {
             shapeParent = new GameObject("SHAPES");
             shapeParent.transform.position = Vector3.zero;
         }
-
-        foreach (var p in system.ShapeAssets.Prefabs) {
-            if (p.Type == type) {
+        
 #if UNITY_EDITOR
-                var obj = PrefabUtility.InstantiatePrefab(p.Prefab, shapeParent.transform) as GameObject;
+        var obj = PrefabUtility.InstantiatePrefab(GameSystem.Instance.ShapePrefab, shapeParent.transform) as GameObject;
 #else
-                var obj = GameObject.Instantiate(p.Prefab, shapeParent.transform);
+        var obj = GameObject.Instantiate(GameSystem.Instance.ShapePrefab, shapeParent.transform);
 #endif
 
-                var shape = obj.GetComponent<Shape>();
-                shape.Data = new ShapeData(type);
-                shape.transform.position = pos;
-            }
-        }
+        var shape = obj.GetComponent<Shape>();
+        shape.Data = new ShapeData(type);
+        shape.transform.position = pos;
 
         ValidateConnections();
     }

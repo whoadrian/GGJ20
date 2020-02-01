@@ -121,6 +121,60 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1 &41657630
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 41657632}
+  - component: {fileID: 41657631}
+  m_Layer: 0
+  m_Name: SHAPE_RENDERER
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &41657631
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 41657630}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 58e6f6bdfce038549b12c8b22b58301e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  assets:
+    Assets:
+    - type: 1
+      asset: {fileID: 7531285954635097684, guid: fdf57fbbd38c6434f83859b738e14242,
+        type: 3}
+    - type: 3
+      asset: {fileID: 733599413893997038, guid: ff4bbe674b4eefb43b99f6aee5b27309,
+        type: 3}
+    - type: 4
+      asset: {fileID: 3249822642323111643, guid: 70ae1f30db9488e43a2236ff2c185a0b,
+        type: 3}
+--- !u!4 &41657632
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 41657630}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 8
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &763650973
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -425,18 +479,9 @@ MonoBehaviour:
   MinBallSpeed: 0.2
   BallPrefab: {fileID: 4555286677524607441, guid: 5e0d6840cc15b0f4987108dc155ff59b,
     type: 3}
+  ShapePrefab: {fileID: 6379626715755072676, guid: 0a0f308316718b3409c19bcceb55433d,
+    type: 3}
   LevelConfig: {fileID: 11400000, guid: f848707aef9bcb7428dbc73837524d46, type: 2}
-  ShapeAssets:
-    Prefabs:
-    - Type: 1
-      Prefab: {fileID: 4964958161148778245, guid: 12142b8c7b4feb64ab25ec6938657a68,
-        type: 3}
-    - Type: 3
-      Prefab: {fileID: 6379626715755072676, guid: 0a0f308316718b3409c19bcceb55433d,
-        type: 3}
-    - Type: 4
-      Prefab: {fileID: 7236308765831662664, guid: 0b2caf1db739701408ef7480fcbed033,
-        type: 3}
   GizmoConfig: {fileID: 11400000, guid: 4c3564984f663e748a8237c735c70935, type: 2}
   Cam: {fileID: 963194227}
   Sequence: {fileID: 1111121559}

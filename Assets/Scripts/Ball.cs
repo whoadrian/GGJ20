@@ -30,6 +30,10 @@ public class Ball : MonoBehaviour {
         set { transform.position = value; }
     }
 
+    public void Awake() {
+        Alive = true;
+    }
+
     public void Command(Command c) {
         switch (c) {
             case global::Command.NONE:

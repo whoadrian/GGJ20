@@ -31,17 +31,6 @@ public enum ShapeType {
     SQUARE = 4
 }
 
-[Serializable]
-public struct ShapeAssets {
-    [Serializable]
-    public struct ShapePrefab {
-        public ShapeType Type;
-        public GameObject Prefab;
-    }
-
-    public ShapePrefab[] Prefabs;
-}
-
 [ExecuteInEditMode]
 public class Shape : MonoBehaviour {
     [ReadOnly]
@@ -49,7 +38,7 @@ public class Shape : MonoBehaviour {
 
     public static List<Shape> AllShapes;
 
-    private static List<Ball> balls = new List<Ball>();
+    private List<Ball> balls = new List<Ball>();
 
     void Start() {
         if (AllShapes == null) {
@@ -108,7 +97,9 @@ public class Shape : MonoBehaviour {
                 logic?.Invoke(Data.Id, Data.IncomingId);
             } else {
                 if (hasOutgoing) {
+                    Debug.Log("HERE " + id);
                     if (id != Guid.Empty.ToString()) {
+                        Debug.Log("SPAWN " + Data.Id + " TO " + id);
                         logic?.Invoke(Data.Id, id);
                     }
                 }
@@ -126,17 +117,26 @@ public class Shape : MonoBehaviour {
         }
     }
 
-    private void SpawnBall(string shapeA, string shapeB) {
+    private Transform ballParent;
 
+    private void SpawnBall(string shapeA, string shapeB) {
+        if (ballParent == null) {
+            ballParent = GameObject.Find("BALL_PARENT")?.transform;
+            if (ballParent == null) {
+                ballParent = new GameObject("BALL_PARENT").transform;
+            }
+        }
+        
         for (int i = 0; i < balls.Count; i++) {
             var b = balls[i];
 
             if (b.Alive && (b.data.ShapeA == shapeA || b.data.ShapeA == shapeB) && (b.data.ShapeB == shapeA || b.data.ShapeB == shapeB)) {
+                Debug.Log("ALREADY THERE");
                 return;
             }
         }
         
-        var obj = Instantiate(GameSystem.Instance.BallPrefab);
+        var obj = Instantiate(GameSystem.Instance.BallPrefab, ballParent);
         var newBall = obj.GetComponent<Ball>();
         newBall.data = new BallData(shapeA, shapeB);
         balls.Add(newBall);
@@ -158,7 +158,7 @@ public class Shape : MonoBehaviour {
 
         for (int i = balls.Count - 1; i >= 0; i--) {
             var b = balls[i];
-            if (b != null) {
+            if (b != null && b.Alive) {
                 b.Command(c);
             } else {
                 balls.Remove(b);

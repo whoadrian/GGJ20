@@ -24,8 +24,8 @@ public class GameSystem : MonoBehaviour {
     
     [Header("Assets")]
     public GameObject BallPrefab;
+    public GameObject ShapePrefab;
     public LevelConfig LevelConfig;
-    public ShapeAssets ShapeAssets;
     public InteractableGizmoConfig GizmoConfig;
 
     [Header("Level")]

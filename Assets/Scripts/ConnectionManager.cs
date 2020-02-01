@@ -70,6 +70,14 @@ public class ConnectionManager : MonoBehaviour {
                             break;
                         }
 
+                        bool shapeBconnectedToSun = false;
+                        foreach (var sunOutgoingId in GameSystem.Instance.Sun.Data.OutgoingIds) {
+                            if (sunOutgoingId == shapeB.Data.Id) {
+                                shapeBconnectedToSun = true;
+                                break;
+                            }
+                        }
+
                         if (shapeB.Data.IncomingId != Guid.Empty.ToString()) {
                             if (shapeB.Data.IncomingId == shapeA.Data.Id) {
                                 shapeB.Data.IncomingId = Guid.Empty.ToString();
@@ -85,7 +93,7 @@ public class ConnectionManager : MonoBehaviour {
                             EditorUtility.SetDirty(shapeB);
                             EditorUtility.SetDirty(shapeA);
 #endif
-                        } else {
+                        } else if (!shapeBconnectedToSun) {
                             int shapeAConnectionIndex = -1;
                             for (int i = 0; i < (int)shapeA.Data.Type; i++) {
                                 if (shapeA.Data.OutgoingIds[i] == Guid.Empty.ToString()) {
