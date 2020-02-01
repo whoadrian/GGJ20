@@ -52,6 +52,10 @@ public class ConnectionManager : MonoBehaviour {
                             break;
                         }
 
+                        if (shapeA.Data.IncomingId == shapeB.Data.Id) {
+                            break;
+                        }
+                        
                         if (shapeB.Data.IncomingId != Guid.Empty.ToString()) {
 
                             if (shapeB.Data.IncomingId == shapeA.Data.Id) {

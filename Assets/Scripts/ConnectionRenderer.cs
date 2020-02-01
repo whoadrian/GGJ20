@@ -148,11 +148,16 @@ public class ConnectionRenderer : MonoBehaviour {
                 var posA = shapeA.Data.Position;
                 var posB = shapeB.Data.Position;
 
-                for (int i = 0; i < entry.Value.positionCount; i++) {
-                    var l = (float)i / (entry.Value.positionCount - 1);
+                if (shapeB.Data.IncomingId != shapeA.Data.Id && shapeA.Data.IncomingId != shapeB.Data.Id) {
+                    shapeConnectionsRemoval.Add(entry.Key);
+                } else {
+                    for (int i = 0; i < entry.Value.positionCount; i++) {
+                        var l = (float)i / (entry.Value.positionCount - 1);
                     
-                    entry.Value.SetPosition(i, Vector2.Lerp(posA, posB, l));
+                        entry.Value.SetPosition(i, Vector2.Lerp(posA, posB, l));
+                    }
                 }
+                
             } else {
                 shapeConnectionsRemoval.Add(entry.Key);
             }
