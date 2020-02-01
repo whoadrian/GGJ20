@@ -18,23 +18,25 @@ public class Sequence : MonoBehaviour {
     //[ReadOnly, ShowInInspector]
     public SequenceData Data;
 
-    private SequenceState state;
+    private SequenceState state = SequenceState.STOPPED;
     public SequenceState State {
         get { return state; }
     }
 
+
     public Action OnSequenceRestart;
 
     private float startTime = 0;
-    private float time = 0;
+    public float StartTime => startTime;
+    private float currentTime = 0;
+    public float CurrentTime => currentTime;
     private Coroutine loop;
-    
-    void Start() {
-    }
+
+    private void Start() => Command(global::Command.STOP);
 
     void Update() {
-        if (State != SequenceState.PAUSED) {
-            time += Time.deltaTime;
+        if (State != SequenceState.PAUSED && State != SequenceState.STOPPED) {
+            currentTime += Time.deltaTime;
         }
     }
 
@@ -64,9 +66,12 @@ public class Sequence : MonoBehaviour {
             case SequenceState.STOPPED:
                 if (loop != null) {
                     StopCoroutine(loop);
+                    currentTime = startTime;
                 }
                 break;
             case SequenceState.PLAYING:
+                if (state == SequenceState.PAUSED)
+                    break;
                 loop = StartCoroutine(Loop());
                 break;
             case SequenceState.PAUSED:
@@ -83,9 +88,9 @@ public class Sequence : MonoBehaviour {
     }
 
     private IEnumerator Loop() {
-        startTime = time;
+        startTime = currentTime;
 
-        while (time - startTime <= Data.duration) {
+        while (currentTime - startTime <= Data.duration) {
             yield return null;
         }
         
