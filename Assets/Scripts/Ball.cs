@@ -6,6 +6,11 @@ using UnityEngine;
 public struct BallData {
     public string ShapeA;
     public string ShapeB;
+
+    public BallData(string shapeA, string shapeB) {
+        this.ShapeA = shapeA;
+        this.ShapeB = shapeB;
+    }
 }
 
 public class Ball : MonoBehaviour {
@@ -14,7 +19,7 @@ public class Ball : MonoBehaviour {
     public bool Alive => alive;
 
     [ReadOnly, ShowInInspector]
-    private BallData data;
+    public BallData data;
     
     private Coroutine routine;
     private bool paused = false;
@@ -33,12 +38,6 @@ public class Ball : MonoBehaviour {
 
     // Update is called once per frame
     void Update() {
-    }
-
-    public void Initialize(BallData d) {
-        data = d;
-        
-        
     }
 
     public void Command(Command c) {

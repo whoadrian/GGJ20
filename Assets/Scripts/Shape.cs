@@ -68,8 +68,13 @@ public class Shape : MonoBehaviour {
 
     public void TriggerShape() {
         for (int i = 0; i < (int)Data.Type; i++) {
+            if (Data.OutgoingIds[i] == Guid.Empty.ToString()) {
+                continue;
+            }
+            
             var obj = Instantiate(GameSystem.Instance.BallPrefab);
             var newBall = obj.GetComponent<Ball>();
+            newBall.data = new BallData(Data.Id, Data.OutgoingIds[i]);
             balls.Add(newBall);
         }
 

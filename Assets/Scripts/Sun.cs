@@ -5,12 +5,11 @@ using UnityEngine;
 
 [Serializable]
 public struct SunData {
-    [SerializeField]
-    public List<string> OutgoingIds;
+    public string[] OutgoingIds;
 }
 
 public class Sun : MonoBehaviour {
-    [ReadOnly]
+    [ReadOnly, SerializeField, ShowInInspector]
     public SunData Data;
 
     public void Command(Command c, SequenceState s) {

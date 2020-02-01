@@ -15,7 +15,7 @@ public enum SequenceState {
 }
 
 public class Sequence : MonoBehaviour {
-    [ReadOnly, ShowInInspector]
+    //[ReadOnly, ShowInInspector]
     public SequenceData Data;
 
     private SequenceState state;

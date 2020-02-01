@@ -31,14 +31,7 @@ public class UI : MonoBehaviour {
     }
 
     private bool CheckSanity() {
-        if (system == null) {
-            system = GameObject.FindObjectOfType<GameSystem>();
-        }
-
-        if (system != null && Application.isPlaying) {
-            return true;
-        }
-
-        return false;
+        system = GameSystem.Instance;
+        return system != null;
     }
 }

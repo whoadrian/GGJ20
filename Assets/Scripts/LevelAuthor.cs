@@ -75,7 +75,9 @@ public class LevelAuthor : MonoBehaviour {
 
     [Button(ButtonStyle.Box)]
     public void ClearAllSunConnections() {
-        // TODO
+        SanityCheck();
+        
+        system.Sun.Data.OutgoingIds = new string[0];
     }
 
     [Button(ButtonStyle.Box)]
@@ -93,7 +95,15 @@ public class LevelAuthor : MonoBehaviour {
             return;
         }
         
-        system.Sun.Data.OutgoingIds.Add(shape.Data.Id);
+        var newList = new string[system.Sun.Data.OutgoingIds.Length + 1];
+
+        int index = 0;
+        foreach (var id in system.Sun.Data.OutgoingIds) {
+            newList[index++] = id;
+        }
+
+        newList[index] = shape.Data.Id;
+        system.Sun.Data.OutgoingIds = newList;
     }
 
     private void SanityCheck() {
