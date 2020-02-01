@@ -1,11 +1,19 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class UI : MonoBehaviour {
 
     private GameSystem system;
-    
+    public SequenceVisualizer Visualizer;
+
+    private void Start()
+    {
+        Visualizer.system = system;
+        Visualizer.sequence = system.Sequence;
+    }
+
     public void Play() {
         if (!CheckSanity()) {
             return;

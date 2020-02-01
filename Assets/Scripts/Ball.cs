@@ -83,15 +83,15 @@ public class Ball : MonoBehaviour {
         var endPos = b.Data.Position;
 
         Position = startPos;
-        var d = (endPos - startPos).magnitude;
-        var p = 0f;
+        var distanceToTravel = (endPos - startPos).magnitude;
+        var distanceTravelled = 0f;
 
-        while (p <= d) {
-            var l = p / d;
-            Position = Vector2.Lerp(startPos, endPos, l);
+        while (distanceTravelled <= distanceToTravel) {
+            var percentageDistanceTravelled = distanceTravelled / distanceToTravel;
+            Position = Vector2.Lerp(startPos, endPos, percentageDistanceTravelled);
 
             if (!paused) {
-                p += GameSystem.Instance.BallSpeed * Time.deltaTime;
+                distanceTravelled += GameSystem.Instance.BallSpeed * Time.deltaTime;
             }
             yield return null;
         }
