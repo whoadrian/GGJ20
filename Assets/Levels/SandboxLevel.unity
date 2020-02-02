@@ -435,6 +435,92 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 58e6f6bdfce038549b12c8b22b58301e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  KillCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 1.0129098
+      outSlope: 1.0129098
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0.15833333
+    - serializedVersion: 3
+      time: 0.215949
+      value: 1.031776
+      inSlope: -1.3054496
+      outSlope: -1.3054496
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33759937
+    - serializedVersion: 3
+      time: 0.4011433
+      value: 0.9067599
+      inSlope: -1.7317594
+      outSlope: -1.7317594
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: -0.51213086
+      outSlope: -0.51213086
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.6266166
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  KillTime: 0.3
+  InitCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 1.5592117
+      outSlope: 1.5592117
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0.2725827
+    - serializedVersion: 3
+      time: 0.26828748
+      value: 1.1174333
+      inSlope: 4.409771
+      outSlope: 4.409771
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.06861267
+      outWeight: 0.08379946
+    - serializedVersion: 3
+      time: 0.77557635
+      value: 0.992847
+      inSlope: -4.584134
+      outSlope: -4.584134
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.18989573
+    - serializedVersion: 3
+      time: 1
+      value: 1
+      inSlope: -2.6125352
+      outSlope: -2.6125352
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.05416578
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  InitTime: 0.2
   assets:
     Assets:
     - type: 1
