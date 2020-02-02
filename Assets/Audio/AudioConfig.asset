@@ -12,7 +12,48 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2417e37d0ddf5ee4ea9b99bba5bdfedd, type: 3}
   m_Name: AudioConfig
   m_EditorClassIdentifier: 
-  CircleSound: {fileID: 8300000, guid: 8926d3f8a942d3a4b978ab4aaab5f4e1, type: 3}
-  TriangleSound: {fileID: 8300000, guid: 1b5484d21dfb26940ba0f1555364f6ca, type: 3}
-  SquareSound: {fileID: 8300000, guid: 05a01419827d36e4e8e1cba3310d2231, type: 3}
+  CircleSound:
+  - {fileID: 8300000, guid: d450b582d07ce0f448e1706d8a2b6e03, type: 3}
+  - {fileID: 8300000, guid: 442aa850ee328ee408979252cabe60ec, type: 3}
+  - {fileID: 8300000, guid: 9aede5f699a113a45baf0506e967d43b, type: 3}
+  - {fileID: 8300000, guid: d05e2dc57f48aeb41b189572dc1540b8, type: 3}
+  - {fileID: 8300000, guid: b794faed3e1b8c44980ae59e473d70dc, type: 3}
+  - {fileID: 8300000, guid: b980428a99cda6347a68a3fec3464cfb, type: 3}
+  - {fileID: 8300000, guid: 3fd72e9432fb79349885effdfcba7358, type: 3}
+  - {fileID: 8300000, guid: 370b3e5ea78205a4c887ff4c6f9f4b53, type: 3}
+  - {fileID: 8300000, guid: 2928cc27d70915344a2096c366b22212, type: 3}
+  - {fileID: 8300000, guid: 02521550a6a47dd46b8fe8a02c5866ff, type: 3}
+  - {fileID: 8300000, guid: a468c15e01fba344e9fb2aef71f73c39, type: 3}
+  TriangleSound:
+  - {fileID: 8300000, guid: 2edc28ba146cd354f83930a3b311f1c0, type: 3}
+  - {fileID: 8300000, guid: d4f216472ffeab7409abb1393b99ce2c, type: 3}
+  - {fileID: 8300000, guid: 7c24e8e2aebe26f4181db103f31de0f6, type: 3}
+  - {fileID: 8300000, guid: 9b40fcc6ce5f1f34b9292f1ee95c3457, type: 3}
+  - {fileID: 8300000, guid: 27ae17a58a9beb64c80c43118c18997a, type: 3}
+  - {fileID: 8300000, guid: 01a067e402453c443ae13e70953fd26e, type: 3}
+  SquareSound:
+  - {fileID: 8300000, guid: 78f4b24c65157f5498e8032ce89be132, type: 3}
+  - {fileID: 8300000, guid: 53e1e75c472a7b94982086981732abf2, type: 3}
+  - {fileID: 8300000, guid: e18f09a99c5c7cd4aa9d8ea74853b864, type: 3}
+  - {fileID: 8300000, guid: 9260a75dc6f9bc741a5b006e20a94277, type: 3}
+  - {fileID: 8300000, guid: 11860e5e242936146b647400309f408c, type: 3}
+  PentagonSound:
+  - {fileID: 8300000, guid: 55768abf574b77442880964c51b484fb, type: 3}
+  - {fileID: 8300000, guid: 8ed51373700f9624d99840899e39a5c2, type: 3}
+  - {fileID: 8300000, guid: 5df7183ba7ddda7489008ba3fd74c3e4, type: 3}
+  - {fileID: 8300000, guid: cd68741292f720b4887c250218fb957f, type: 3}
+  - {fileID: 8300000, guid: 96acda03bb9f56b43beaf7d2cd4efdf3, type: 3}
+  - {fileID: 8300000, guid: 1c616af04edfff042bba402e744d5b8d, type: 3}
+  OctagonSound:
+  - {fileID: 8300000, guid: 09cc6628050b0b441a363d46c52a4256, type: 3}
+  - {fileID: 8300000, guid: b1fb2d33ecbe37c47a8d86f35096e403, type: 3}
+  - {fileID: 8300000, guid: 97969aaa0973428448f9cb1d13a61a0e, type: 3}
+  - {fileID: 8300000, guid: 5f609ed06df2df644b9c05afddb9d129, type: 3}
+  SextagonSound:
+  - {fileID: 8300000, guid: 3c0c83353b0a71c4c9d8b627f97838c5, type: 3}
+  - {fileID: 8300000, guid: 614eff08fd8a76f4cb77d80629c08e45, type: 3}
+  - {fileID: 8300000, guid: b4c362c4c99188442995f2568917a0e2, type: 3}
+  - {fileID: 8300000, guid: 4e1fffe8488836a4eb411ce8d8d3deca, type: 3}
+  - {fileID: 8300000, guid: fa4d10289a7d8ae47b055fe2f4f8986c, type: 3}
+  - {fileID: 8300000, guid: b958ca2ff56823e42a829c17860e4178, type: 3}
   ConnectionSound: {fileID: 8300000, guid: ec7a58b1d1693a74e91215efd036d5b9, type: 3}
