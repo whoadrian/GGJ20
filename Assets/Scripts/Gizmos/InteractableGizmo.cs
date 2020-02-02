@@ -133,6 +133,8 @@ namespace whoa.UX {
                     }
                 }
             }
+            
+            tr.position = new Vector3(Mathf.FloorToInt(tr.position.x) + 0.5f, Mathf.FloorToInt(tr.position.y) + 0.5f, Mathf.FloorToInt(tr.position.z));
         }
     }
 }
