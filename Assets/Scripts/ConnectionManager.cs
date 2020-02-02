@@ -62,7 +62,8 @@ public class ConnectionManager : MonoBehaviour {
 
                             GameSystem.Instance.Sun.Data.AddOutgoingId(shapeA.Data.Id);
 #if UNITY_EDITOR
-                            EditorUtility.SetDirty(shapeA);
+                            if (shapeA)
+                                EditorUtility.SetDirty(shapeA);
 #endif            
                             OnConnectionCreated?.Invoke();
                             LevelAuthor.ValidateConnections();

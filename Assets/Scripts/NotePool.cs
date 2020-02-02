@@ -26,7 +26,7 @@ public class NotePool : MonoBehaviour
     private void AddItemsToPool(ShapeType shapeType, int itemsToAdd)
     {
         for (var i = 0; i < itemsToAdd; i++) {
-            var instance = PrefabUtility.InstantiatePrefab(notePrefab) as GameObject;
+            var instance = GameObject.Instantiate(notePrefab) as GameObject;
             instance.gameObject.SetActive(false);
             poolsByShape[shapeType].Add(instance);
             instance.transform.parent = transform;

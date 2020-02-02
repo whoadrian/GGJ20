@@ -16,6 +16,22 @@ public class ShapeRenderer : MonoBehaviour {
         public ShapeAsset[] Assets;
     }
 
+    [Header("Kill settings")]
+    public AnimationCurve KillCurve;
+    public float KillTime;
+    public GameObject KillFX;
+
+    [Header("Spawn settings")]
+    public AnimationCurve InitCurve;
+    public float InitTime;
+    public GameObject InitFX;
+
+    [Header("Triggered settings")]
+    public AnimationCurve TriggeredCurve;
+    public float TriggeredTime;
+    public GameObject TriggeredFX;
+
+    [Header("Assets")]
     public ShapeAssets assets;
 
     private GameObject visualModelParent;
@@ -47,7 +63,7 @@ public class ShapeRenderer : MonoBehaviour {
         }
 
         foreach (var entry in toRemove) {
-            LevelAuthor.SafeDestroy(Objects[entry].gameObject);
+            Objects[entry].Kill();
             Objects.Remove(entry);
         }
 
@@ -72,7 +88,7 @@ public class ShapeRenderer : MonoBehaviour {
             if (a.type == type) {
                 var obj = GameObject.Instantiate(a.asset, visualModelParent.transform);
                 var v = obj.GetComponent<ShapeVisualModel>();
-                v.Init(shape);
+                v.Init(shape, this);
                 return v;
             }
         }

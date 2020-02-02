@@ -18,7 +18,7 @@ public class LevelAuthor : MonoBehaviour {
             shapeParent = new GameObject("SHAPES");
             shapeParent.transform.position = Vector3.zero;
         }
-        
+
 #if UNITY_EDITOR
         var obj = PrefabUtility.InstantiatePrefab(GameSystem.Instance.ShapePrefab, shapeParent.transform) as GameObject;
 #else
@@ -38,11 +38,13 @@ public class LevelAuthor : MonoBehaviour {
         SanityCheck();
         if (GetPairShape(out var shapeA, out var shapeB)) {
             if (shapeB.Data.IncomingId != Guid.Empty.ToString()) {
+#if UNITY_EDITOR
                 bool replace = EditorUtility.DisplayDialog("Warning", "Shape B already has an incoming connection. Replace?", "Yes", "No");
 
                 if (!replace) {
                     return;
                 }
+#endif
             }
 
             int shapeAConnectionIndex = -1;
@@ -70,7 +72,9 @@ public class LevelAuthor : MonoBehaviour {
         SanityCheck();
         if (GetSingleShape(out var shape)) {
             shape.Data.IncomingId = Guid.Empty.ToString();
+#if UNITY_EDITOR
             EditorUtility.SetDirty(shape);
+#endif
             ValidateConnections();
         }
     }
@@ -82,7 +86,9 @@ public class LevelAuthor : MonoBehaviour {
         if (GetSingleShape(out var shape)) {
             for (int i = 0; i < shape.Data.OutgoingIds.Length; i++) {
                 shape.Data.OutgoingIds[i] = Guid.Empty.ToString();
+#if UNITY_EDITOR
                 EditorUtility.SetDirty(shape);
+#endif
                 ValidateConnections();
             }
         }
@@ -95,7 +101,9 @@ public class LevelAuthor : MonoBehaviour {
 
         if (GetSingleShape(out var shape)) {
             system.Sun.Data.AddOutgoingId(shape.Data.Id);
+#if UNITY_EDITOR
             EditorUtility.SetDirty(shape);
+#endif
             ValidateConnections();
         }
     }
@@ -106,7 +114,9 @@ public class LevelAuthor : MonoBehaviour {
         SanityCheck();
         if (GetSingleShape(out var shape)) {
             system.Sun.Data.RemoveOutgoingId(shape.Data.Id);
+#if UNITY_EDITOR
             EditorUtility.SetDirty(shape);
+#endif
             ValidateConnections();
         }
     }
@@ -116,7 +126,9 @@ public class LevelAuthor : MonoBehaviour {
     public void ClearAllSunConnections() {
         SanityCheck();
         system.Sun.Data.OutgoingIds = new string[0];
+#if UNITY_EDITOR
         EditorUtility.SetDirty(system.Sun);
+#endif
         ValidateConnections();
     }
 
@@ -147,14 +159,18 @@ public class LevelAuthor : MonoBehaviour {
 
                 if (idA == idB) {
                     system.Sun.Data.OutgoingIds[j] = Guid.Empty.ToString();
+#if UNITY_EDITOR
                     EditorUtility.SetDirty(system.Sun);
+#endif
                 }
             }
         }
 
         // Remove sun's empty connections
         system.Sun.Data.RemoveEmptyIds();
+#if UNITY_EDITOR
         EditorUtility.SetDirty(system.Sun);
+#endif
 
         // Check if all sun's outgoing ids have existing shapes, remove if so
         for (int i = 0; i < system.Sun.Data.OutgoingIds.Length; i++) {
@@ -173,7 +189,9 @@ public class LevelAuthor : MonoBehaviour {
 
             if (!valid) {
                 system.Sun.Data.RemoveOutgoingId(id);
+#if UNITY_EDITOR
                 EditorUtility.SetDirty(system.Sun);
+#endif
             }
         }
 
@@ -193,7 +211,9 @@ public class LevelAuthor : MonoBehaviour {
 
                     if (idA == idB) {
                         shape.Data.OutgoingIds[j] = Guid.Empty.ToString();
+#if UNITY_EDITOR
                         EditorUtility.SetDirty(shape);
+#endif
                     }
                 }
             }
@@ -213,7 +233,9 @@ public class LevelAuthor : MonoBehaviour {
 
                 if (!valid) {
                     shape.Data.IncomingId = Guid.Empty.ToString();
+#if UNITY_EDITOR
                     EditorUtility.SetDirty(shape);
+#endif
                 }
             }
 
@@ -233,7 +255,9 @@ public class LevelAuthor : MonoBehaviour {
 
                 if (!valid) {
                     shape.Data.OutgoingIds[i] = Guid.Empty.ToString();
+#if UNITY_EDITOR
                     EditorUtility.SetDirty(shape);
+#endif
                 }
             }
         }
@@ -249,7 +273,7 @@ public class LevelAuthor : MonoBehaviour {
 
     private static bool GetSingleShape(out Shape shape) {
         shape = null;
-
+#if UNITY_EDITOR
         if (UnityEditor.Selection.transforms.Length != 1) {
             Debug.LogError("Please select 1 shape");
             return false;
@@ -260,14 +284,14 @@ public class LevelAuthor : MonoBehaviour {
             Debug.LogError("Shape not selected");
             return false;
         }
-
+#endif
         return true;
     }
 
     private static bool GetPairShape(out Shape shapeA, out Shape shapeB) {
         shapeA = null;
         shapeB = null;
-
+#if UNITY_EDITOR
         if (Selection.transforms.Length != 2) {
             Debug.LogError("Please select 2 shapes");
             return false;
@@ -278,7 +302,7 @@ public class LevelAuthor : MonoBehaviour {
 
         shapeA = first.GetComponent<Shape>();
         shapeB = second.GetComponent<Shape>();
-
+#endif
         return shapeA != null && shapeB != null;
     }
 

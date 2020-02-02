@@ -44,6 +44,8 @@ public class Shape : MonoBehaviour {
     private List<Ball> balls = new List<Ball>();
 
     private AudioSource source;
+    
+    public Action OnTriggered;
 
     void Start() {
         if (AllShapes == null) {
@@ -67,6 +69,7 @@ public class Shape : MonoBehaviour {
         TraverseTree(SpawnBall, id);
         source.clip = GameAudio.Instance.Config.GetSound(Data.Type);
         source.Play();
+        OnTriggered?.Invoke();
     }
 
     public void TraverseTree(Action<string, string> logic, string id = null) {
