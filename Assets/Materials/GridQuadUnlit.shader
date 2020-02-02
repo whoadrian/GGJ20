@@ -8,7 +8,7 @@
 Shader "GridQuad/Color" {
 Properties {
 [PerRendererData]
-    _Color ("Main Color", Color) = (1,1,1,1)
+    _Color ("Main Color", Color) = (0, 0, 0,1)
 }
 
 SubShader {

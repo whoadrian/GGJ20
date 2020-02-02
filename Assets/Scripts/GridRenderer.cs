@@ -34,14 +34,7 @@ public class GridRenderer : MonoBehaviour {
         foreach (var q in quadRenderers) {
             q.transform.localScale = new Vector3(scale, scale, scale);
         }
-    }
-
-    // Update is called once per frame
-    void Update() {
-        if (quadRenderers == null) {
-            quadRenderers = quadParent.GetComponentsInChildren<Renderer>();
-        }
-
+        
         foreach (var r in quadRenderers) {
             Color color1 = new Color(Random.Range(minColorValue, maxColorValue), Random.Range(minColorValue, maxColorValue), Random.Range(minColorValue, maxColorValue), 1);
             Color color2 = new Color(Random.Range(minColorValue, maxColorValue), Random.Range(minColorValue, maxColorValue), Random.Range(minColorValue, maxColorValue), 1);
