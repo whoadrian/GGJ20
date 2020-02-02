@@ -109,6 +109,7 @@ namespace whoa.UX {
             if (hovered) {
                 bool click = Input.GetMouseButtonDown(0);
                 bool hold = Input.GetMouseButton(0);
+                bool rClick = Input.GetMouseButtonDown(1);
 
                 if (!dragging) {
                     if (click) {
@@ -122,8 +123,12 @@ namespace whoa.UX {
                     if (!hold) {
                         dragging = false;
                     } else {
-                        if (dragPlane.Raycast(ray, out float enter)) {
-                            tr.position = (float3)ray.GetPoint(enter) + startDragDiff;
+                        if (rClick) {
+                            LevelAuthor.SafeDestroy(gameObject);
+                        } else {
+                            if (dragPlane.Raycast(ray, out float enter)) {
+                                tr.position = (float3)ray.GetPoint(enter) + startDragDiff;
+                            }
                         }
                     }
                 }
