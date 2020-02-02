@@ -21,14 +21,17 @@ public struct ShapeData {
         Type = type;
         Position = Vector2.zero;
         IncomingId = empty;
-        OutgoingIds = new[] {empty, empty, empty, empty, empty, empty};
+        OutgoingIds = new[] {empty, empty, empty, empty, empty, empty, empty, empty, empty, empty};
     }
 }
 
 public enum ShapeType {
     CIRCLE = 1,
     TRIANGLE = 3,
-    SQUARE = 4
+    SQUARE = 4,
+    SEXTAGON = 6,
+    PENTAGON = 5,
+    OCTAGON = 8
 }
 
 [ExecuteInEditMode]

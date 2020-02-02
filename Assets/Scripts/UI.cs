@@ -58,6 +58,18 @@ public class UI : MonoBehaviour {
     public void SpawnSquare() {
         LevelAuthor.CreateShape(UnityEngine.Random.onUnitSphere * 4, ShapeType.SQUARE);
     }
+    
+    public void SpawnPentagon() {
+        LevelAuthor.CreateShape(UnityEngine.Random.onUnitSphere * 4, ShapeType.PENTAGON);
+    }
+    
+    public void SpawnSextagon() {
+        LevelAuthor.CreateShape(UnityEngine.Random.onUnitSphere * 4, ShapeType.SEXTAGON);
+    }
+    
+    public void SpawnOctagon() {
+        LevelAuthor.CreateShape(UnityEngine.Random.onUnitSphere * 4, ShapeType.OCTAGON);
+    }
 
     public void OnTempoChange(float value) {
         GameSystem.Instance.BallSpeed = Mathf.Lerp(GameSystem.Instance.MinBallSpeed, GameSystem.Instance.MaxBallSpeed, value);
