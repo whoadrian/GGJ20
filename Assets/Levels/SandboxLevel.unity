@@ -297,6 +297,16 @@ PrefabInstance:
       propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2675119946196669820, guid: ddd18697b9fb3b1408001f8467f452fd,
+        type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5318665531059874180, guid: ddd18697b9fb3b1408001f8467f452fd,
+        type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 9171744872015889047, guid: ddd18697b9fb3b1408001f8467f452fd,
         type: 3}
       propertyPath: m_AnchorMax.y
@@ -463,7 +473,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Data:
-    duration: 999
+    duration: 20
 --- !u!114 &1111121560
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -479,6 +489,8 @@ MonoBehaviour:
   BallSpeed: 1
   MaxBallSpeed: 3
   MinBallSpeed: 0.2
+  MaxDuration: 30
+  MinDuration: 2
   BallPrefab: {fileID: 4555286677524607441, guid: 5e0d6840cc15b0f4987108dc155ff59b,
     type: 3}
   ShapePrefab: {fileID: 6379626715755072676, guid: 0a0f308316718b3409c19bcceb55433d,

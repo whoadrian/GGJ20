@@ -21,6 +21,8 @@ public class GameSystem : MonoBehaviour {
     public float BallSpeed = 0.5f;
     public float MaxBallSpeed = 3.0f;
     public float MinBallSpeed = 0.2f;
+    public float MaxDuration = 30;
+    public float MinDuration = 2;
     
     [Header("Assets")]
     public GameObject BallPrefab;
