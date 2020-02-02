@@ -50,6 +50,7 @@ public class GameSystem : MonoBehaviour {
     private void OnSequenceRestart() {
         Debug.Log("Sequence restart");
         Sun.Command(global::Command.STOP, false);
+        KillRemainingBalls();
         Sun.Command(global::Command.PLAY, true);
     }
 
@@ -60,6 +61,18 @@ public class GameSystem : MonoBehaviour {
         var sequenceState = Sequence.State;
         if (Sequence.Command(c)) {
             Sun.Command(c, sequenceState == SequenceState.STOPPED);
+            if (c == global::Command.STOP) {
+                KillRemainingBalls();
+            }
+        }
+    }
+
+    private void KillRemainingBalls() {
+        var balls = GameObject.FindObjectsOfType<Ball>();
+        foreach (var b in balls) {
+            if (b != null) {
+                LevelAuthor.SafeDestroy(b.gameObject);
+            }
         }
     }
 }

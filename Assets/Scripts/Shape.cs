@@ -67,7 +67,8 @@ public class Shape : MonoBehaviour {
 
     public void TriggerShape(string id = null) {
         TraverseTree(SpawnBall, id);
-        source.clip = GameAudio.Instance.Config.GetSound(Data.Type);
+        source.clip = GameAudio.Instance.Config.GetSound(Data.Type, out float vol);
+        source.volume = vol;
         source.Play();
         OnTriggered?.Invoke();
     }

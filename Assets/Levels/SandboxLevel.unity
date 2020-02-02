@@ -12291,7 +12291,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Data:
-    duration: 20
+    duration: 30
 --- !u!114 &1111121560
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -12304,10 +12304,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d31743109f953d546870ecd9d9ce643a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  BallSpeed: 1
-  MaxBallSpeed: 3
+  BallSpeed: 2.5
+  MaxBallSpeed: 6
   MinBallSpeed: 0.2
-  MaxDuration: 30
+  MaxDuration: 40
   MinDuration: 2
   BallPrefab: {fileID: 4555286677524607441, guid: 5e0d6840cc15b0f4987108dc155ff59b,
     type: 3}

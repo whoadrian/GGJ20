@@ -67,6 +67,8 @@ public class ShapeVisualModel : MonoBehaviour {
             t += Time.deltaTime;
             yield return null;
         }
+        
+        transform.localScale  = Vector3.one;
     }
 
     public IEnumerator InitRoutine() {
@@ -91,10 +93,12 @@ public class ShapeVisualModel : MonoBehaviour {
         }
         
         transform.localRotation = quaternion.identity;
+        transform.localScale  = Vector3.one;
     }
     
     public IEnumerator KillRoutine() {
         float t = 0;
+        transform.localScale  = Vector3.one;
         Vector3 initScale = transform.localScale;
         while (t < manager.KillTime) {
             float l = t / manager.KillTime;
